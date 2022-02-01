@@ -2,13 +2,13 @@
 Coding Exercise - backend software engineering
 REST API web service for tracking a specific user's rewards points balance. Accepts HTTP request formatted in JSON
 
-##ASSUMPTIONS
+## ASSUMPTIONS
 - Original transaction data should not be modified once it is added to memory
 - Clients can add negative point values using the /add-transaction call, but point balances for each payer can not be made negative
 using this method
 - Clients cannot spend negative points
 
-##REST API
+## REST API
 1) /add-transaction: Accepts POSTS request to add transaction, echoes back transaction
     format: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }
     return: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }
@@ -25,10 +25,10 @@ earned earliest being spent first (based on submitted timestamp).
     return: { "NOAH": 2000, "DANNON": 600 }
     ResponseCode: 200 on success
    
-##How to Run
+## How to Run
 run BackendCodingExerciseApplication.java
 
-##Sample Commands
+## Sample Commands
 ADD POINTS: { "payer": "DANNON", "points": 100, "timestamp": "2022-02-01T14:00:00Z" }
 http://localhost:8080/add-transaction
 
