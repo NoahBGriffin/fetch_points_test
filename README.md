@@ -10,7 +10,7 @@ using this method
 
 ## REST API
 #### 1) /add-transaction:
-<b>POST</b>
+<b>POST</b>  
 Accepts POSTS request to add transaction, echoes back transaction  
     format: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }  
     return: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }   
@@ -26,7 +26,7 @@ earned earliest being spent first (based on submitted timestamp).
    ResponseCode: 202 on success  
    
 #### 3) /point-balance:
-<b>GET</b>
+<b>GET</b>  
 Accepts GET request and returns the user's current point balance, separated by payer.  
     return: { "NOAH": 2000, "DANNON": 600 }  
     ResponseCode: 200 on success  
