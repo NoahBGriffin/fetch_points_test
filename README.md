@@ -9,7 +9,7 @@ using this method
 - Clients cannot spend negative points when using /spend-points
 
 ## REST API
-##### 1) /add-transaction:  
+#### 1) /add-transaction:  
 Accepts POSTS request to add transaction, echoes back transaction  
     format: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }  
     return: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }   
@@ -23,7 +23,7 @@ earned earliest being spent first (based on submitted timestamp).
    return: { "payer": "DANNON", "points": -100 }  
    ResponseCode: 202 on success  
    
-##### 3) /point-balance:  
+#### 3) /point-balance:  
 Accepts GET request and returns the user's current point balance, separated by payer.  
     return: { "NOAH": 2000, "DANNON": 600 }  
     ResponseCode: 200 on success  
