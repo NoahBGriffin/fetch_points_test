@@ -10,8 +10,11 @@ using this method
 
 ## REST API
 1) /add-transaction: Accepts POSTS request to add transaction, echoes back transaction
+
     format: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }
+    
     return: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }
+    
     ResponseCode: 201 on success
    
 2) /spend-points: Accepts PUT request and responds with the name of each payer who originally paid points to the user account
