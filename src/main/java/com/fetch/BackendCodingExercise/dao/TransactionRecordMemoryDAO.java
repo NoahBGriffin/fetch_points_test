@@ -2,8 +2,9 @@ package com.fetch.BackendCodingExercise.dao;
 
 import com.fetch.BackendCodingExercise.exception.PointsOverdraftException;
 import com.fetch.BackendCodingExercise.model.TransactionRecord;
+import org.apache.tomcat.jni.Local;
 
-import java.sql.Timestamp;
+
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
@@ -16,6 +17,11 @@ public class TransactionRecordMemoryDAO implements TransactionRecordDAO {
     public TransactionRecordMemoryDAO() {
         transactions = new ArrayList<>();
         setTransactions();
+    }
+
+    //TODO: delete later
+    public List<TransactionRecord> get() {
+        return transactions;
     }
 
     /** Stores a new transaction record in our current data of all transaction records
@@ -44,15 +50,36 @@ public class TransactionRecordMemoryDAO implements TransactionRecordDAO {
         //no negative points
         //returns payer and points spent
         //adds record to transactions
-    public List<String> spendPoints(int points) throws PointsOverdraftException {
+    public Map<String, Integer> spendPoints(int points) throws PointsOverdraftException {
         if (getPointTotal() < points) throw new PointsOverdraftException();
 
-        List<String> result = new ArrayList<>();
+        Map<String, Integer> result = new HashMap<>();
 
         Collections.sort(transactions);
         List<TransactionRecord> pointsLeft = subtractNegativePointsInList();
 
-        
+        int index = 0;
+        while (points > 0) {
+
+            TransactionRecord current = pointsLeft.get(index);
+            String payer = current.getPayer();
+            int pointsSubtracted = current.getPoints();
+
+            System.out.println(current);
+
+            if (points >= pointsSubtracted) {
+                points -= pointsSubtracted;
+            } else {
+                pointsSubtracted = points;
+                points = 0;
+            }
+            if (pointsSubtracted != 0) {
+                TransactionRecord record = new TransactionRecord(payer, -pointsSubtracted, LocalDateTime.now());
+                addTransaction(record);
+                result = addToMap(result, record);
+            }
+            index++;
+        }
 
         return result;
     }
@@ -64,14 +91,19 @@ public class TransactionRecordMemoryDAO implements TransactionRecordDAO {
     public Map<String, Integer> pointBalances() {
         Map<String, Integer> balances = new HashMap<>();
         for (TransactionRecord transaction : transactions) {
-            if(balances.containsKey(transaction.getPayer())) {
-                int sum = balances.get(transaction.getPayer()) + transaction.getPoints();
-                balances.put(transaction.getPayer(), sum);
-            } else {
-                balances.put(transaction.getPayer(), transaction.getPoints());
-            }
+            balances = addToMap(balances, transaction);
         }
         return balances;
+    }
+
+    private Map<String, Integer> addToMap(Map<String, Integer> map, TransactionRecord transaction) {
+        if(map.containsKey(transaction.getPayer())) {
+            int sum = map.get(transaction.getPayer()) + transaction.getPoints();
+            map.put(transaction.getPayer(), sum);
+        } else {
+            map.put(transaction.getPayer(), transaction.getPoints());
+        }
+        return map;
     }
 
     private List<TransactionRecord> subtractNegativePointsInList() throws PointsOverdraftException {
@@ -79,32 +111,41 @@ public class TransactionRecordMemoryDAO implements TransactionRecordDAO {
 
         for (TransactionRecord transactionRecord : transactions) {
             if (transactionRecord.getPoints() < 0) {
-                subtractPoints(result, transactionRecord);
+                result = subtractPointsByPayer(result, transactionRecord);
             } else {
-                result.add(transactionRecord);
+                try {
+                    result.add((TransactionRecord) transactionRecord.clone());
+                } catch (CloneNotSupportedException e) {
+                    System.out.println(e);
+                }
             }
         }
 
         return result;
     }
 
-    private void subtractPoints(List<TransactionRecord> list, TransactionRecord record) throws PointsOverdraftException {
+    private List<TransactionRecord> subtractPointsByPayer(List<TransactionRecord> list, TransactionRecord record) throws PointsOverdraftException {
         int negativePoints = record.getPoints();
 
         for (TransactionRecord current : list) {
+            System.out.println(negativePoints);
             if (current.getPayer().equals(record.getPayer())) {
                 int currentPoints = current.getPoints();
-                if (currentPoints > negativePoints) {
-                    current.setPoints(currentPoints - negativePoints);
-                    break;
+                if (currentPoints > -negativePoints) {
+                    current.setPoints(currentPoints + negativePoints);
+                    negativePoints = 0;
                 } else { //negative points greater than current transaction
                     current.setPoints(0);
-                    negativePoints -= currentPoints;
+                    negativePoints += currentPoints;
                 }
             }
+
+            if (negativePoints == 0) break;
         }
 
         if (negativePoints != 0) throw new PointsOverdraftException();
+
+        return list;
     }
 
 

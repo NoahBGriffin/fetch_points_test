@@ -3,7 +3,7 @@ package com.fetch.BackendCodingExercise.model;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-public class TransactionRecord implements Comparable<TransactionRecord> {
+public class TransactionRecord implements Comparable<TransactionRecord>, Cloneable {
 
     private String payer;
     private int points;
@@ -15,9 +15,17 @@ public class TransactionRecord implements Comparable<TransactionRecord> {
         this.timestamp = timestamp;
     }
 
+    public TransactionRecord() {
+        this.payer = "";
+        this.points = 0;
+        this.timestamp = null;
+    }
+
+
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
+
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
@@ -42,13 +50,17 @@ public class TransactionRecord implements Comparable<TransactionRecord> {
 
     @Override
     public String toString() {
-        return "{ \"payer\": \"" + payer + '\"' +
-                ", \"points\": " + points +
-                '}';
+        return "payer: " + this.payer + ", points: " + this.points;
     }
 
     @Override
     public int compareTo(TransactionRecord other) {
         return this.getTimestamp().compareTo(other.getTimestamp());
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+
+        return super.clone();
     }
 }
