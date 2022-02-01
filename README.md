@@ -17,7 +17,7 @@ Accepts POSTS request to add transaction, echoes back transaction
     ResponseCode: 201 on success  
    
 #### 2) /spend-points:
-##### PUT
+<b>PUT</b>
 Accepts PUT request and responds with the name of each payer who originally paid points to the user account
 and the amount of points spent from each. Points are spent based on chronological order of when they were earned, with points 
 earned earliest being spent first (based on submitted timestamp).  
