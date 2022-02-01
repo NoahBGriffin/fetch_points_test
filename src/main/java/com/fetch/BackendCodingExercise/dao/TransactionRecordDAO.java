@@ -8,11 +8,9 @@ import java.util.Map;
 
 public interface TransactionRecordDAO {
 
-    //add transaction
-    public TransactionRecord addTransaction(TransactionRecord transactionRecord) throws PointsOverdraftException;
-    //spend points
-    //return all payer point balances
-    public Map<String, Integer> pointBalances();
+    TransactionRecord addTransaction(TransactionRecord transactionRecord) throws PointsOverdraftException;
+
+    Map<String, Integer> pointBalances();
 
     Map<String, Integer> spendPoints(int points) throws PointsOverdraftException;
 

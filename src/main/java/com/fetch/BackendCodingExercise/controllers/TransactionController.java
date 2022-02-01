@@ -25,9 +25,10 @@ public class TransactionController {
         return transactionRecordDAO.addTransaction(transaction);
     }
 
-    @RequestMapping(path = "/spend-points", method = RequestMethod.POST)
+    @RequestMapping(path = "/spend-points", method = RequestMethod.PUT)
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public Map<String, Integer> spend(@RequestParam int points) throws PointsOverdraftException {
+    public Map<String, Integer> spend(@RequestBody int points) throws PointsOverdraftException {
+        if (points < 0) throw new IllegalArgumentException("Points cannot be negative");
         return transactionRecordDAO.spendPoints(points);
     }
 
