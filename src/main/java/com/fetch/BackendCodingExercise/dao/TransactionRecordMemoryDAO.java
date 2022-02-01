@@ -4,10 +4,12 @@ import com.fetch.BackendCodingExercise.exception.PointsOverdraftException;
 import com.fetch.BackendCodingExercise.model.TransactionRecord;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.*;
 
-
+/**
+ * Memory data access object for a user's transaction record information
+ * Allows REST controller to access user transaction data from system memory
+ */
 public class TransactionRecordMemoryDAO implements TransactionRecordDAO {
 
     private List<TransactionRecord> transactions;
@@ -20,11 +22,6 @@ public class TransactionRecordMemoryDAO implements TransactionRecordDAO {
     public TransactionRecordMemoryDAO() {
         transactions = new ArrayList<>();
         setTransactions();
-    }
-
-    //TODO: delete later
-    public List<TransactionRecord> get() {
-        return transactions;
     }
 
     /** Stores a new transaction record in our current data of all transaction records
@@ -193,10 +190,10 @@ public class TransactionRecordMemoryDAO implements TransactionRecordDAO {
      * a sample transaction has been left and commented out as an example
      */
     private void setTransactions() {
-        transactions.add(new TransactionRecord(
-                "DANNON",
-                1000,
-                LocalDateTime.of(2015, Month.APRIL, 29, 19, 30, 20))
-        );
+//        transactions.add(new TransactionRecord(
+//                "DANNON",
+//                1000,
+//                LocalDateTime.of(2015, Month.APRIL, 29, 19, 30, 20))
+//        );
     }
 }
