@@ -1,6 +1,6 @@
 # fetch_points_test_Noah-Griffin
 Coding Exercise - backend software engineering
-REST API web service for tracking a specific user's rewards points balance. Accepts HTTP request formatted in JSON
+REST API web service for tracking a specific user's rewards points balance. Accepts HTTP request formatted in JSON. Implemented with Spring Boot in Java
 
 ## ASSUMPTIONS
 - Original transaction data should not be modified once it is added to memory
