@@ -12,8 +12,8 @@ using this method
 #### 1) /add-transaction:
 <b>POST</b>  
 Accepts POSTS request to add transaction, echoes back transaction  
-    format: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }  
-    return: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }   
+    format: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00" }  
+    return: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00" }   
     ResponseCode: 201 on success  
    
 #### 2) /spend-points:
@@ -35,7 +35,7 @@ Accepts GET request and returns the user's current point balance, separated by p
 run BackendCodingExerciseApplication.java
 
 ## Sample Commands
-ADD POINTS: { "payer": "DANNON", "points": 100, "timestamp": "2022-02-01T14:00:00Z" } 
+ADD POINTS: { "payer": "DANNON", "points": 100, "timestamp": "2022-02-01T14:00:00" } 
 http://localhost:8080/add-transaction
 
 POINT BALANCE: http://localhost:8080/point-balance
