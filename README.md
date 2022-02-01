@@ -9,9 +9,9 @@ using this method
 - Clients cannot spend negative points when using /spend-points
 
 ## REST API
-1) /add-transaction: Accepts POSTS request to add transaction, echoes back transaction \n
-    format: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" } \n
-    return: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" } \n
+1) /add-transaction: Accepts POSTS request to add transaction, echoes back transaction  
+    format: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }  
+    return: { "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }  
     
     ResponseCode: 201 on success
    
