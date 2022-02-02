@@ -7,6 +7,7 @@ REST API web service for tracking a specific user's rewards points balance. Acce
 - Clients can add negative point values using /add-transaction, but point balances for each payer can not be made negative
 using this method
 - Clients cannot spend negative points when using /spend-points
+- Clients can add transactions at any point regardless of timestamp. Ie transactions are not necessarily sent in correct timestamp order
 
 ## REST API
 
